@@ -8,8 +8,8 @@ let GOOGLE_API_KEY = prompt("Please enter your Google AI API key:");
 // Speech recognition setup
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
-recognition.lang = 'en-US';
-recognition.interimResults = false;
+recognition.lang = 'zh-TW'; // 將語言設為繁體中文
+recognition.interimResults = true; // 啟用即時結果
 
 // Start recording
 startRecordingButton.addEventListener('click', () => {
@@ -18,13 +18,17 @@ startRecordingButton.addEventListener('click', () => {
 
 // Optimize speech recognition logic
 recognition.onresult = async (event) => {
-    const transcript = event.results[0][0].transcript.trim();
+    const transcript = Array.from(event.results)
+        .map(result => result[0].transcript)
+        .join('')
+        .trim();
+
     transcriptElement.textContent = `Transcript: ${transcript}`;
 
-    // Add additional debugging logs
-    console.log(`Transcript received: ${transcript}`); // Log the full transcript
+    // 增加更多日誌以便調試
+    console.log(`完整的語音辨識結果: ${transcript}`); // Log the full transcript
 
-    // Define MBTI keywords
+    // 定義 MBTI 關鍵字
     const mbtiKeywords = [
         'INTJ', 'ENTP', 'INFJ', 'ENFP',
         'ISTJ', 'ESTJ', 'ISFJ', 'ESFJ',
@@ -32,17 +36,13 @@ recognition.onresult = async (event) => {
         'INTP', 'ENTJ', 'INFP', 'ENFJ'
     ];
 
-    // Extract MBTI keyword if present
+    // 提取 MBTI 關鍵字
     const detectedKeyword = mbtiKeywords.find(keyword => transcript.toUpperCase().includes(keyword));
 
-    // Log the detected MBTI keyword
-    console.log(`Detected keyword: ${detectedKeyword}`); // Log the detected MBTI keyword
+    // 日誌記錄檢測到的 MBTI 關鍵字
+    console.log(`檢測到的關鍵字: ${detectedKeyword}`); // Log the detected MBTI keyword
 
-    // Ensure changeBackgroundColor is called correctly
     if (detectedKeyword) {
-        console.log(`Calling changeBackgroundColor for: ${detectedKeyword}`); // Log before calling the function
-        // Debugging: Log detected MBTI type and background color changes
-        console.log(`Detected MBTI Type: ${detectedKeyword}`); // Log detected MBTI type
         responseElement.textContent = '正在生成回應，請稍候...';
         const aiResponse = await getAIResponse(detectedKeyword);
         responseElement.textContent = `AI: ${aiResponse}`;
@@ -55,7 +55,7 @@ recognition.onresult = async (event) => {
         // Convert AI response to speech
         textToSpeech(aiResponse);
     } else {
-        responseElement.textContent = '未偵測到有效的 MBTI 關鍵字，請再試一次。';
+        responseElement.textContent = '未檢測到有效的 MBTI 關鍵字，請再試一次。';
     }
 };
 
