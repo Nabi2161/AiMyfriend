@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI好聲音-MBTI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+    <div class="moving-element"></div>
+
+    <h1>AI好聲音-MBTI</h1>
+    <button id="start-recording" style="background-color: transparent; border: none; cursor: pointer;">
+        <img src="heart-icon.png" alt="Start Talking" style="width: 150px; height: 150px;">
+    </button>
+    <p style="text-align: center; font-size: 16px; margin-top: 10px;">點擊愛心狗開始錄音說話</p>
+    <p id="transcript">回覆: </p>
+    
+    <div id="dialog-box">
+        <label for="mbti-input">輸入你的MBTI:</label>
+        <input type="text" id="mbti-input" placeholder="e.g., INTJ">
+        <button id="submit-mbti">傳送</button>
+        </button>
+    </div>
+
+    <div id="response-box" style="border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
+        <p id="response">AI: </p>
+        <button id="pause-speaking" style="margin-top: 10px; padding: 10px 20px; font-size: 16px; background-color: #FF6347; color: white; border: none; border-radius: 5px; cursor: pointer;">暫停</button>
+    </div>
+
+    <div id="voice-dialog-box" style="border: 1px solid #ccc; padding: 10px; margin-top: 20px; border-radius: 10px; background-color: #fff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <p id="voice-dialog">語音輸入中，請說出您的 MBTI 類型...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
